@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "284982355058-2rrpfrv7h9nk144fqtubgum15dd2g66n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.zolotenkov.shopping_list",
+            "certificate_hash": "152f0267ba7c03d68ec39c4bc7b8956e4005fd78"
+          }
+        },
+        {
           "client_id": "284982355058-29rl4s6vlaq2rto0hikp643re1mcoipg.apps.googleusercontent.com",
           "client_type": 3
         }
