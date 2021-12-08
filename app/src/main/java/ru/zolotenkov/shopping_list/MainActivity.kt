@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.R
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import ru.zolotenkov.shopping_list.databinding.ActivityMainBinding
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpActionBar()
 
-        myRef = db.getReference("message" ).child("user").child("products")
+        myRef = db.getReference(auth.currentUser!!.uid ).child(auth.currentUser?.displayName.toString()).child("products")
         myRef.setValue("TextMessage")
 
 
@@ -52,11 +51,18 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
     }
-    //override fun onCreateOptionsMenu(menu: Menu?): Boolean {  ///Функция выполняется при создании тулбара.
-    //    menuInflater.inflate(R.menu.exit, menu)          //Мы передаём в menu нашу разметку main_menu и инфлатор ее раздувает
-    //    return true                                         //Возвращаем тру, ибо функция возвращает Bool
-    //}
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {  ///Функция выполняется при создании тулбара.
+        menuInflater.inflate(R.menu.exit, menu)          //Мы передаём в menu нашу разметку main_menu и инфлатор ее раздувает
+        return true                                         //Возвращаем тру, ибо функция возвращает Bool
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {       //Слушатель нажатий в меню
+        if(item.itemId == R.id.sign_out){                           //Проверка на нажатие
+            auth.signOut()                                          //Выходим из аккаунта
+            finish()                                                //Закрываем активити
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 
 }
