@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setUpActionBar()
 
         myRef = db.getReference("message" ).child("user").child("products")
         myRef.setValue("TextMessage")
