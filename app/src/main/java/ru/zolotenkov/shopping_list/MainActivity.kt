@@ -5,30 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View.VISIBLE
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import ru.zolotenkov.shopping_list.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var shopMain: ActivityMainBinding //Все элементы гл. экрана activity_main
-
+    lateinit var binding: ActivityMainBinding //Все элементы гл. экрана activity_main
+    val db = Firebase.database
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        shopMain = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(shopMain.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        shopMain.button.setOnClickListener {
-            shopMain.textBlock.text = "Комит готов"
-            shopMain.layoutBox.setBackgroundColor(Color.YELLOW)
-        }
 
-        shopMain.addItemButton.setOnClickListener {
-            shopMain.addItemPlain.visibility = VISIBLE
-        }
 
-        shopMain.addItemPlain.setOnClickListener {
-            val text = shopMain.addItemPlain.text.toString()
-            shopMain.byeList.text = text
-        }
+
     }
 }
