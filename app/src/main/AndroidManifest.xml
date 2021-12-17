@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.zolotenkov.shopping_list">
     <!--     Когда запускается приложение запускается этот класс первым android:name=".activities.MainApp" для инициализации ДБ -->
+    <!--    android:name это класс ,который будет execute в первый раз-->
     <application
         android:name=".activities.MainApp"
         android:allowBackup="true"

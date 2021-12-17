@@ -24,8 +24,9 @@ abstract class MainDatabase : RoomDatabase() {
         //Volatile работает в потоке не сохраняя данные переменной в кеш и будет атомарно читаться и записываться. Доступен во всех потоках!
         @Volatile
         private var INSTANCE: MainDatabase? = null
+
         fun getDataBase(context: Context): MainDatabase{
-            return INSTANCE ?: synchronized(this) {                   //Если три потока работают с нашей инстанцией создают его, synchronized блокирует их одновременную работу. Если один поток уже осздает базу то synchronized не даст другим сделать тоже самое.
+            return INSTANCE ?: synchronized(this) {                   //Если три потока работают с нашей инстанцией/cоздают его, synchronized блокирует их одновременную работу. Если один поток уже осздает базу то synchronized не даст другим сделать тоже самое.
             val instance = Room.databaseBuilder(                //Элвис оператор указывает что делать если инстанция ещё не создана и нашей БД ещё нет. В переменную instance создаем нашу БД.
                 context.applicationContext,                     //Указываем контекст. Контекстом будет все наше приложение чтобы мы могли использовать эту инстанцию в любом активити.
                 MainDatabase::class.java,                       //Передаём назваание нашего класса.
