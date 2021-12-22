@@ -1,17 +1,8 @@
 package ru.zolotenkov.shopping_list.activities
 
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
-import com.squareup.picasso.Picasso
+import androidx.appcompat.app.AppCompatActivity
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityMainBinding
 
