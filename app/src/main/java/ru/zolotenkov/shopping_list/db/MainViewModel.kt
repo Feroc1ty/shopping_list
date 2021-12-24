@@ -14,6 +14,11 @@ class MainViewModel(database: MainDatabase): ViewModel() {
     fun insertNote(note: NoteItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
         dao.insertNote(note)
     }
+
+    fun deleteNote(id: Int) = viewModelScope.launch {            //Функция которая через корутину удаляет заметку
+        dao.deleteNote(id)
+    }
+
     class MainViewModelFactory(val database: MainDatabase): ViewModelProvider.Factory{      //Нужен для инициализации класса MainViewModel чтобы на прямую не пользоваться им.
         override fun <T : ViewModel> create(modelClass: Class<T>): T {                      //Инициализируем через ViewModelProvider.Factory
             if (modelClass.isAssignableFrom(MainViewModel::class.java)){

@@ -3,7 +3,6 @@ package ru.zolotenkov.shopping_list.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ import ru.zolotenkov.shopping_list.db.NoteAdapter
 import ru.zolotenkov.shopping_list.entities.NoteItem
 
 
-class NoteFragment : BaseFragment() {
+class NoteFragment : BaseFragment(), NoteAdapter.Listner {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var editLauncher: ActivityResultLauncher<Intent>
     private lateinit var adapter: NoteAdapter
@@ -59,7 +58,7 @@ class NoteFragment : BaseFragment() {
      */
     private fun initRcView() = with(binding) {
         rcViewNote.layoutManager = LinearLayoutManager(activity)
-        adapter = NoteAdapter()
+        adapter = NoteAdapter(this@NoteFragment)
         rcViewNote.adapter = adapter
     }
     /*
@@ -83,5 +82,9 @@ class NoteFragment : BaseFragment() {
         const val NEW_NOTE_KEY = "new_note_key"
         @JvmStatic
         fun newInstance() = NoteFragment()
+    }
+
+    override fun deleteItem(id: Int) {
+        mainViewModel.deleteNote(id)
     }
 }
