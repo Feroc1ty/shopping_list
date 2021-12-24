@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Pressed Shop List", Toast.LENGTH_SHORT).show()
                 }
                 R.id.new_item -> {
-                    Toast.makeText(this, "Pressed Add Item", Toast.LENGTH_SHORT).show()
+                    FragmentManager.currentFrag?.onClickNew()
                 }
             }
             true
