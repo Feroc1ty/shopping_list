@@ -7,7 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityNewNoteBinding
+import ru.zolotenkov.shopping_list.entities.NoteItem
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewNoteBinding
@@ -39,11 +42,30 @@ class NewNoteActivity : AppCompatActivity() {
      */
     private fun setMainResult(){
         val i = Intent().apply {
-            putExtra(NoteFragment.TITLE_KEY, binding.edTitle.text.toString())
-            putExtra(NoteFragment.DESC_KEY, binding.edDescription.text.toString())
+            putExtra(NoteFragment.NEW_NOTE_KEY, createNewNote())
         }
         setResult(RESULT_OK, i)
         finish()
+    }
+    /*
+    Заполняем наш класс NoteItem
+     */
+    private fun createNewNote(): NoteItem{
+        return NoteItem(
+            null,
+            binding.edTitle.text.toString(),
+            binding.edDescription.text.toString(),
+            getCurrentTime(),
+            ""
+        )
+    }
+
+    /*
+    Берём текущую дату и время с телефона и возвращаем в виде String
+     */
+    private fun getCurrentTime(): String{
+        val formatter = SimpleDateFormat("hh:mm:ss - dd/MM/yyyy", Locale.getDefault())
+        return formatter.format(Calendar.getInstance().time)
     }
     /*
     Подключаем отображение кнопки назад в экшн баре в этом активити

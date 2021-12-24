@@ -11,7 +11,7 @@ class MainViewModel(database: MainDatabase): ViewModel() {
 
     val allNotes: LiveData<List<NoteItem>> = dao.getAllNotes().asLiveData()     //Получаем как список типа NoteItem все наши заметки из базы
 
-    fun insertMote(note: NoteItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
+    fun insertNote(note: NoteItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
         dao.insertNote(note)
     }
     class MainViewModelFactory(val database: MainDatabase): ViewModelProvider.Factory{      //Нужен для инициализации класса MainViewModel чтобы на прямую не пользоваться им.
