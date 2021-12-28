@@ -15,6 +15,9 @@ class MainViewModel(database: MainDatabase): ViewModel() {
         dao.insertNote(note)
     }
 
+    fun updateNote(note: NoteItem) = viewModelScope.launch {            //Функция которая через корутину обновляет запись в бд
+        dao.updateNote(note)
+    }
     fun deleteNote(id: Int) = viewModelScope.launch {            //Функция которая через корутину удаляет заметку
         dao.deleteNote(id)
     }
