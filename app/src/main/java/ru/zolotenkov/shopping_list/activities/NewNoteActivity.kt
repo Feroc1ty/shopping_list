@@ -8,6 +8,9 @@ import android.text.Spannable
 import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityNewNoteBinding
 import ru.zolotenkov.shopping_list.entities.NoteItem
@@ -60,6 +63,12 @@ class NewNoteActivity : AppCompatActivity() {
         }
         else if (item.itemId == R.id.id_bold) {
             setBoldForSelectedText()
+        }
+        else if (item.itemId == R.id.id_color) {
+            if(binding.colorPicker.isShown){
+                closeColorPicker()
+            }
+            else openColorPicker()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -144,5 +153,27 @@ class NewNoteActivity : AppCompatActivity() {
     private fun actionBarSettings(){
         val ab = supportActionBar
         ab?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun openColorPicker(){
+        binding.colorPicker.visibility = View.VISIBLE
+        val openAnim = AnimationUtils.loadAnimation(this, R.anim.open_color_picker)
+        binding.colorPicker.startAnimation(openAnim)
+    }
+    private fun closeColorPicker(){
+        val closeAnim = AnimationUtils.loadAnimation(this, R.anim.close_color_picker)
+        closeAnim.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                binding.colorPicker.visibility = View.GONE
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+
+        })
+        binding.colorPicker.startAnimation(closeAnim)
     }
 }

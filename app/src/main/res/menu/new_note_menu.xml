@@ -6,12 +6,19 @@
         android:id="@+id/id_save"
         android:icon="@drawable/ic_save"
         app:showAsAction="ifRoom"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         />
     <item
         android:title="Bold"
         android:id="@+id/id_bold"
         android:icon="@drawable/ic_bold"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="2"
+        />
+    <item
+        android:title="Color"
+        android:id="@+id/id_color"
+        android:icon="@drawable/ic_color"
         app:showAsAction="ifRoom"
         android:orderInCategory="1"
         />
