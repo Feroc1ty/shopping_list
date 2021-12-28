@@ -6,12 +6,15 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityNewNoteBinding
 import ru.zolotenkov.shopping_list.entities.NoteItem
@@ -31,6 +34,25 @@ class NewNoteActivity : AppCompatActivity() {
         actionBarSettings()
         getNote()
         init()
+        onClickColorPicker()
+        actionMenuCallback()
+    }
+    /*
+    Слушатель нажатий в color picker и вызов функции setColorForSelectedText
+     */
+    private fun onClickColorPicker() = with(binding){
+        imRed.setOnClickListener {
+            setColorForSelectedText(R.color.picker_red) }
+        imBlack.setOnClickListener {
+            setColorForSelectedText(R.color.picker_black) }
+        imBlue.setOnClickListener {
+            setColorForSelectedText(R.color.picker_blue) }
+        imYellow.setOnClickListener {
+            setColorForSelectedText(R.color.picker_yellow)}
+        imGreen.setOnClickListener {
+            setColorForSelectedText(R.color.picker_green)}
+        imOrange.setOnClickListener {
+            setColorForSelectedText(R.color.picker_orange)}
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -101,9 +123,27 @@ class NewNoteActivity : AppCompatActivity() {
          */
         edDescription.text.trim()
         edDescription.setSelection(startPos)
-
     }
+        /*
+        Функция красит выбранный текст либо удаляет стиль с текста
+         */
+    private fun setColorForSelectedText(colorId: Int) = with(binding){
+        val startPos = edDescription.selectionStart
+        val endPos = edDescription.selectionEnd
 
+        val styles = edDescription.text.getSpans(startPos,endPos, ForegroundColorSpan::class.java)
+        if(styles.isNotEmpty()) edDescription.text.removeSpan(styles[0])
+
+        edDescription.text.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(this@NewNoteActivity, colorId)),
+            startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        /*
+        Функция trim удаляет все пробелы из html текста
+         */
+        edDescription.text.trim()
+        edDescription.setSelection(startPos)
+    }
     /*
     Делаем проверку на наличие данных. Если пусто то создаем новую, если есть в базе то апдейтим.
      */
@@ -183,5 +223,35 @@ class NewNoteActivity : AppCompatActivity() {
 
         })
         binding.colorPicker.startAnimation(closeAnim)
+    }
+
+    /*
+    Пишем колбек который удаляет меню действий которое возникает при выборе текста
+    По факту он просто его очищает сразу после вызова
+     */
+    private fun actionMenuCallback(){
+        val actionCallback = object : ActionMode.Callback{
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                menu?.clear()
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                menu?.clear()
+                return true
+            }
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                return true
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+            }
+        }
+
+        /*
+        Присваиваем ранее созданный колбек дефолтному
+         */
+        binding.edDescription.customSelectionActionModeCallback = actionCallback
     }
 }
