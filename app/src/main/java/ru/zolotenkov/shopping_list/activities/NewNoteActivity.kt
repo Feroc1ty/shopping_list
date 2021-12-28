@@ -1,8 +1,11 @@
 package ru.zolotenkov.shopping_list.activities
 
 import android.content.Intent
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
 import ru.zolotenkov.shopping_list.R
@@ -52,8 +55,35 @@ class NewNoteActivity : AppCompatActivity() {
         } else if (item.itemId == android.R.id.home) {
             finish()
         }
+        else if (item.itemId == R.id.id_bold) {
+            setBoldForSelectedText()
+        }
         return super.onOptionsItemSelected(item)
     }
+    /*
+    Функция которая смотрит какой текст выделен, делает проверку есть ли там стиль, если да то убирает, если нет то создает
+     */
+    private fun setBoldForSelectedText() = with(binding){
+        val startPos = edDescription.selectionStart
+        val endPos = edDescription.selectionEnd
+
+        val styles = edDescription.text.getSpans(startPos,endPos, StyleSpan::class.java)
+        var boldStyle: StyleSpan? = null
+        if(styles.isNotEmpty()){
+            edDescription.text.removeSpan(styles[0])
+        }
+        else{
+            boldStyle = StyleSpan(Typeface.BOLD)
+        }
+        edDescription.text.setSpan(boldStyle, startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        /*
+        Функция trim удаляет все пробелы их html текста
+         */
+        edDescription.text.trim()
+        edDescription.setSelection(startPos)
+
+    }
+
     /*
     Делаем проверку на наличие данных. Если пусто то создаем новую, если есть в базе то апдейтим.
      */
