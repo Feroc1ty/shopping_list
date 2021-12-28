@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.widget.Toast
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityMainBinding
+import ru.zolotenkov.shopping_list.dialogs.NewListDialog
 import ru.zolotenkov.shopping_list.fragments.FragmentManager
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding               //Все элементы гл. экрана activity_main
 
 
@@ -32,11 +33,16 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Pressed Shop List", Toast.LENGTH_SHORT).show()
                 }
                 R.id.new_item -> {
-                    FragmentManager.currentFrag?.onClickNew()
+                    NewListDialog.showDialog(this, this)
+                    //FragmentManager.currentFrag?.onClickNew()
                 }
             }
             true
         }
+    }
+
+    override fun onClick(name: String) {
+        Toast.makeText(this, "Its OK", Toast.LENGTH_SHORT).show()
     }
 
 }
