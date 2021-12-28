@@ -12,6 +12,7 @@ import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityNewNoteBinding
 import ru.zolotenkov.shopping_list.entities.NoteItem
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
+import ru.zolotenkov.shopping_list.utils.HtmlManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,10 +35,12 @@ class NewNoteActivity : AppCompatActivity() {
         }
 
     }
-
+    /*
+    По скольку теперь в тексте могут быть стили перегоняем текст из HTML формата в строку
+     */
     private fun fillNote() = with(binding){
         edTitle.setText(note?.title)
-        edDescription.setText(note?.content)
+        edDescription.setText(HtmlManager.getFromHtml(note?.content!!).trim())
 
     }
 
@@ -107,20 +110,22 @@ class NewNoteActivity : AppCompatActivity() {
     }
     /*
     Передаём в заметку данные из базы для редактирования
+    Записываем в виде HTML (стили) через HTML менеджер
      */
     private fun updateNote() : NoteItem?  = with(binding){
         return note?.copy(
             title = edTitle.text.toString(),
-            content = edDescription.text.toString() )
+            content = HtmlManager.toHtml(edDescription.text) )
     }
     /*
     Заполняем наш класс NoteItem
+    Записываем в виде HTML (стили) через HTML менеджер
      */
     private fun createNewNote(): NoteItem{
         return NoteItem(
             null,
             binding.edTitle.text.toString(),
-            binding.edDescription.text.toString(),
+            HtmlManager.toHtml(binding.edDescription.text),
             getCurrentTime(),
             ""
         )
