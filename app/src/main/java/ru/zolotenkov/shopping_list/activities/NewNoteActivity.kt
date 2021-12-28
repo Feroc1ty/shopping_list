@@ -1,5 +1,6 @@
 package ru.zolotenkov.shopping_list.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import ru.zolotenkov.shopping_list.databinding.ActivityNewNoteBinding
 import ru.zolotenkov.shopping_list.entities.NoteItem
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
 import ru.zolotenkov.shopping_list.utils.HtmlManager
+import ru.zolotenkov.shopping_list.utils.MyTouchListner
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +30,12 @@ class NewNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
         actionBarSettings()
         getNote()
+        init()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun init(){
+        binding.colorPicker.setOnTouchListener(MyTouchListner())
     }
 
     private fun getNote(){
