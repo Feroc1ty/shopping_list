@@ -8,6 +8,7 @@ import ru.zolotenkov.shopping_list.databinding.ActivityMainBinding
 import ru.zolotenkov.shopping_list.dialogs.NewListDialog
 import ru.zolotenkov.shopping_list.fragments.FragmentManager
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
+import ru.zolotenkov.shopping_list.fragments.ShopListNamesFragment
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding               //Все элементы гл. экрана activity_main
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+            /*
+            При старте приложения чтобы по дефолту открывался список покупок
+             */
+        FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
         setBottomNavListner()                                           //Кидаем её в цикл активити, слушаем нажатия.
     }
 
@@ -30,11 +35,10 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
                 }
                 R.id.shop_list -> {
-                    Toast.makeText(this, "Pressed Shop List", Toast.LENGTH_SHORT).show()
+                    FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
                 }
                 R.id.new_item -> {
-                    NewListDialog.showDialog(this, this)
-                    //FragmentManager.currentFrag?.onClickNew()
+                    FragmentManager.currentFrag?.onClickNew()
                 }
             }
             true
