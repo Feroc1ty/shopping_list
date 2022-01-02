@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Dima/AndroidStudioProjects/test/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/drawable/ic_delete.xml" value="0.3828125" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/drawable/ic_save.xml" value="0.3828125" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/activity_main.xml" value="0.2015625" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/activity_new_note.xml" value="0.5" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/exit_menu.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/fragment_note.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/fragment_shop_list_names.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/list_name_item.xml" value="0.6198243412797992" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/new_list_dialog.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/note_list_item.xml" value="0.2473378509196515" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/layout/switch_item.xml" value="0.20520833333333333" />

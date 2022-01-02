@@ -11,6 +11,8 @@ import ru.zolotenkov.shopping_list.activities.MainApp
 import ru.zolotenkov.shopping_list.databinding.FragmentShopListNamesBinding
 import ru.zolotenkov.shopping_list.db.MainViewModel
 import ru.zolotenkov.shopping_list.dialogs.NewListDialog
+import ru.zolotenkov.shopping_list.entities.ShoppingListName
+import ru.zolotenkov.shopping_list.utils.TimeManager
 
 
 class ShopListNamesFragment : BaseFragment() {
@@ -23,7 +25,14 @@ class ShopListNamesFragment : BaseFragment() {
     override fun onClickNew() {
         NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener{
             override fun onClick(name: String){
-                Toast.makeText(context, "Name: $name", Toast.LENGTH_SHORT).show()
+                val shopListName = ShoppingListName(
+                    null,
+                    name,
+                    TimeManager.getCurrentTime(),
+                    0,
+                    0,
+                    "")
+                mainViewModel.insertShopListName(shopListName)
             }
         })
     }
@@ -59,7 +68,7 @@ class ShopListNamesFragment : BaseFragment() {
     Функция которая следит за изменениями в базе данных и будет выдавать обновлённый список
      */
     private fun observer(){
-        mainViewModel.allNotes.observe(viewLifecycleOwner, {
+        mainViewModel.allShopListNames.observe(viewLifecycleOwner, {
 
         })
     }

@@ -21,6 +21,7 @@ import ru.zolotenkov.shopping_list.entities.NoteItem
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
 import ru.zolotenkov.shopping_list.utils.HtmlManager
 import ru.zolotenkov.shopping_list.utils.MyTouchListner
+import ru.zolotenkov.shopping_list.utils.TimeManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -183,18 +184,12 @@ class NewNoteActivity : AppCompatActivity() {
             null,
             binding.edTitle.text.toString(),
             HtmlManager.toHtml(binding.edDescription.text),
-            getCurrentTime(),
+            TimeManager.getCurrentTime(),
             ""
         )
     }
 
-    /*
-    Берём текущую дату и время с телефона и возвращаем в виде String
-     */
-    private fun getCurrentTime(): String{
-        val formatter = SimpleDateFormat("hh:mm:ss - dd/MM/yyyy", Locale.getDefault())
-        return formatter.format(Calendar.getInstance().time)
-    }
+
     /*
     Подключаем отображение кнопки назад в экшн баре в этом активити
      */
