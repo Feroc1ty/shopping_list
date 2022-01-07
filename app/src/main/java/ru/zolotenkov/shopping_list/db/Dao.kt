@@ -21,6 +21,9 @@ interface Dao {                                            //Dao должен б
     @Query ("DELETE FROM note_list WHERE id IS :id")            //Удаляем из базы заметку по ID
     suspend fun deleteNote(id: Int)
 
+    @Query ("DELETE FROM shopping_list_names WHERE id IS :id")            //Удаляем из базы список
+    suspend fun deleteShopListName(id: Int)
+
     @Insert
     suspend fun insertNote(note: NoteItem)                //обязательно suspend потому что эти функции мы будем запускать внутри корутин. Внутри корутин потому что выполнение этих функций может занять некоторое время.
 
