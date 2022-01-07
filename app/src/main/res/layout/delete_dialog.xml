@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:text="@string/cancel_btn" />
+            android:text="@string/cancel_btn"
+            app:backgroundTint="#8BC34A" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
