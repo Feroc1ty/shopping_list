@@ -26,4 +26,5 @@ class ExampleUnitTest {
     fun print(){
         println(people(arrayOf(3 to 0,9 to 1,4 to 10,12 to 2,6 to 1,7 to 10)))
     }
+    for(y in 1..100) y+= 2
 }

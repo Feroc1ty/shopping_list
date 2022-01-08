@@ -16,6 +16,8 @@
     <string name="delete_item">Do you want delete this list?</string>
     <string name="delete_btn">Delete</string>
     <string name="cancel_btn">Cancel</string>
+    <string name="update">Update</string>
+    <string name="update_title">Update List Name</string>
 
 
 </resources>
