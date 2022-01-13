@@ -8,14 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ListNameItemBinding
-import ru.zolotenkov.shopping_list.databinding.NoteListItemBinding
-import ru.zolotenkov.shopping_list.dialogs.DeleteDialog
-import ru.zolotenkov.shopping_list.dialogs.NewListDialog
-import ru.zolotenkov.shopping_list.entities.NoteItem
-import ru.zolotenkov.shopping_list.entities.ShoppingListName
-import ru.zolotenkov.shopping_list.utils.HtmlManager
+import ru.zolotenkov.shopping_list.entities.ShopListNameItem
 
-class ShopListNameAdapter(private val listener: Listener): ListAdapter<ShoppingListName, ShopListNameAdapter.ItemHolder>(ItemComparator()) {
+class ShopListNameAdapter(private val listener: Listener): ListAdapter<ShopListNameItem, ShopListNameAdapter.ItemHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.create(parent)
@@ -29,12 +24,12 @@ class ShopListNameAdapter(private val listener: Listener): ListAdapter<ShoppingL
     class ItemHolder(view: View) : RecyclerView.ViewHolder(view){
         private val binding = ListNameItemBinding.bind(view)
 
-        fun setData(shopListNameItem: ShoppingListName, listener: Listener) = with(binding){        //Функция которая заполняет наш шаблон данными из таблицы NoteItem
+        fun setData(shopListNameItem: ShopListNameItem, listener: Listener) = with(binding){        //Функция которая заполняет наш шаблон данными из таблицы NoteItem
 
             tvListName.text = shopListNameItem.name
             tvTime.text = shopListNameItem.time
             itemView.setOnClickListener {
-
+                listener.onClickItem(shopListNameItem)
             }
             imDelete.setOnClickListener{
                 listener.deleteItem(shopListNameItem.id!!)
@@ -51,20 +46,20 @@ class ShopListNameAdapter(private val listener: Listener): ListAdapter<ShoppingL
             }
         }
     }
-    class ItemComparator : DiffUtil.ItemCallback<ShoppingListName>(){                               //Класс в котором сравниваются обьекты чтобы DiffUtil знал что обновлять в листе а что уже стоит убрать
-        override fun areItemsTheSame(oldItem: ShoppingListName, newItem: ShoppingListName): Boolean {
+    class ItemComparator : DiffUtil.ItemCallback<ShopListNameItem>(){                               //Класс в котором сравниваются обьекты чтобы DiffUtil знал что обновлять в листе а что уже стоит убрать
+        override fun areItemsTheSame(oldItem: ShopListNameItem, newItem: ShopListNameItem): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ShoppingListName, newItem: ShoppingListName): Boolean {
+        override fun areContentsTheSame(oldItem: ShopListNameItem, newItem: ShopListNameItem): Boolean {
             return oldItem == newItem
         }
     }
 
     interface Listener{
         fun deleteItem(id: Int)
-        fun editItem(shopListName: ShoppingListName)
-        fun onClickItem(shopListName: ShoppingListName)
+        fun editItem(shopListNameItem: ShopListNameItem)
+        fun onClickItem(shopListNameItem: ShopListNameItem)
     }
 
 }

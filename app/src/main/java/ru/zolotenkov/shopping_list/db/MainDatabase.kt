@@ -6,13 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import ru.zolotenkov.shopping_list.entities.LibraryItem
 import ru.zolotenkov.shopping_list.entities.NoteItem
-import ru.zolotenkov.shopping_list.entities.ShoppingListItem
-import ru.zolotenkov.shopping_list.entities.ShoppingListName
+import ru.zolotenkov.shopping_list.entities.ShopListItem
+import ru.zolotenkov.shopping_list.entities.ShopListNameItem
 
 @Database (entities = [LibraryItem::class,      //Указываем что это основной класс для БД. Что это и есть БД. Room создаст базу с нашим названием и создаст все таблицы которые я создал.
     NoteItem::class,                        //В entities =  перечисляем все таблицы которые будут в базе данных.
-    ShoppingListItem::class,
-    ShoppingListName::class],
+    ShopListItem::class,
+    ShopListNameItem::class],
     version = 1)                        //Версия нужна для миграции. Если потом вдруг в обнове я в базу добавлю какие то новые столбцы в базу, то чтобы они обновились без потери данных нужно указывать версию.
 
 abstract class MainDatabase : RoomDatabase() {

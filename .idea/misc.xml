@@ -23,6 +23,18 @@
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/menu/exit_menu.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/menu/main_menu.xml" value="0.2015625" />
         <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list/app/src/main/res/menu/new_note_menu.xml" value="0.29375" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/drawable/ic_edit_library.xml" value="0.3828125" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/drawable/ic_save.xml" value="0.3828125" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/activity_shop_list.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/delete_dialog.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/edit_action_layout.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/edit_list_item_dialog.xml" value="0.21920289855072464" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/list_name_item.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/new_list_dialog.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/shop_library_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/layout/shop_list_item.xml" value="0.5" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/menu/bottom_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Ferocity/AndroidStudioProjects/shopping_list1/app/src/main/res/menu/shop_list_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

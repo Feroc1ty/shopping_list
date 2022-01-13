@@ -1,22 +1,21 @@
 package ru.zolotenkov.shopping_list.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.zolotenkov.shopping_list.activities.MainApp
-import ru.zolotenkov.shopping_list.databinding.DeleteDialogBinding
+import ru.zolotenkov.shopping_list.activities.ShopListActivity
 import ru.zolotenkov.shopping_list.databinding.FragmentShopListNamesBinding
 import ru.zolotenkov.shopping_list.db.MainViewModel
 import ru.zolotenkov.shopping_list.db.ShopListNameAdapter
 import ru.zolotenkov.shopping_list.dialogs.DeleteDialog
 import ru.zolotenkov.shopping_list.dialogs.NewListDialog
-import ru.zolotenkov.shopping_list.entities.NoteItem
-import ru.zolotenkov.shopping_list.entities.ShoppingListName
+import ru.zolotenkov.shopping_list.entities.ShopListNameItem
 import ru.zolotenkov.shopping_list.utils.TimeManager
 
 
@@ -31,7 +30,7 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
     override fun onClickNew() {
         NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener{
             override fun onClick(name: String){
-                val shopListName = ShoppingListName(
+                val shopListName = ShopListNameItem(
                     null,
                     name,
                     TimeManager.getCurrentTime(),
@@ -77,7 +76,7 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
     Функция которая следит за изменениями в базе данных и будет выдавать обновлённый список
      */
     private fun observer(){
-        mainViewModel.allShopListNames.observe(viewLifecycleOwner, {
+        mainViewModel.allShopListNamesItem.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
     }
@@ -98,16 +97,19 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
         })
     }
 
-    override fun editItem(shopListName: ShoppingListName) {
+    override fun editItem(shopListNameItem: ShopListNameItem) {
         NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener{
             override fun onClick(name: String){
 
-                mainViewModel.updateListName(shopListName.copy(name = name))
+                mainViewModel.updateListName(shopListNameItem.copy(name = name))
             }
-        }, name = shopListName.name)
+        }, name = shopListNameItem.name)
     }
 
-    override fun onClickItem(shopListName: ShoppingListName) {
-        TODO("Not yet implemented")
+    override fun onClickItem(shopListNameItem: ShopListNameItem) {
+        val i = Intent(activity, ShopListActivity:: class.java).apply {
+            putExtra(ShopListActivity.SHOP_LIST_NAME, shopListNameItem)
+        }
+        startActivity(i)
     }
 }

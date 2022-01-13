@@ -17,7 +17,6 @@ object DeleteDialog {
         builder.setView(binding.root)
         binding.apply {
             bDelete.setOnClickListener {
-
                 listener.onClick()
                 dialog?.dismiss()
             }
