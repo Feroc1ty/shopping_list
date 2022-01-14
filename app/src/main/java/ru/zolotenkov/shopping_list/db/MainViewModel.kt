@@ -2,6 +2,7 @@ package ru.zolotenkov.shopping_list.db
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
+import ru.zolotenkov.shopping_list.entities.LibraryItem
 import ru.zolotenkov.shopping_list.entities.NoteItem
 import ru.zolotenkov.shopping_list.entities.ShopListItem
 import ru.zolotenkov.shopping_list.entities.ShopListNameItem
@@ -25,8 +26,11 @@ class MainViewModel(database: MainDatabase): ViewModel() {
     fun insertShopListName(listNameItem: ShopListNameItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
         dao.insertShopListName(listNameItem)
     }
-    fun insertShopItem(shopListItem: ShopListItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
+    fun insertShopItem(shopListItem: ShopListItem) = viewModelScope.launch {            //Функция которая через корутину записывает в библиотеку имена
         dao.insertItem(shopListItem)
+        if(!isLibraryItemExists(shopListItem.name)) {
+            dao.insertLibraryItem(LibraryItem(null, shopListItem.name))
+        }
     }
 
     fun updateListItem(item: ShopListItem) = viewModelScope.launch {            //Функция которая через корутину обновляет список
@@ -45,6 +49,9 @@ class MainViewModel(database: MainDatabase): ViewModel() {
     fun deleteShopList(id: Int, deleteList: Boolean) = viewModelScope.launch {            //Функция которая через корутину удаляет список с покупками
         if(deleteList) dao.deleteShopListName(id)
         dao.deleteShopItemsByListId(id)
+    }
+    private suspend fun isLibraryItemExists(name: String): Boolean{
+        return dao.getAllLibraryItems(name).isNotEmpty()
     }
 
     class MainViewModelFactory(val database: MainDatabase): ViewModelProvider.Factory{      //Нужен для инициализации класса MainViewModel чтобы на прямую не пользоваться им.
