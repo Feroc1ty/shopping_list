@@ -1,5 +1,6 @@
 package ru.zolotenkov.shopping_list.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -15,6 +16,7 @@ import ru.zolotenkov.shopping_list.db.ShopListItemAdapter
 import ru.zolotenkov.shopping_list.dialogs.EditListItemDialog
 import ru.zolotenkov.shopping_list.entities.ShopListItem
 import ru.zolotenkov.shopping_list.entities.ShopListNameItem
+import ru.zolotenkov.shopping_list.utils.ShareHelper
 
 class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
     private lateinit var binding: ActivityShopListBinding
@@ -63,6 +65,14 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
                 }
                 R.id.clear_list -> {
                     mainViewModel.deleteShopList(shopListNameItem?.id!!, false)
+                }
+                /*
+                С помощью chooser передаём интент и выбираем приложение с которым хотим поделиться
+                 */
+                R.id.share_list -> {
+                    startActivity(Intent.createChooser(ShareHelper.shareShopList(adapter?.currentList!!, shopListNameItem?.name!!),
+                        "Share by"
+                    ))
                 }
             }
 
