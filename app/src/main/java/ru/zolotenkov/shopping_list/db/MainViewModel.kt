@@ -42,8 +42,9 @@ class MainViewModel(database: MainDatabase): ViewModel() {
     fun deleteNote(id: Int) = viewModelScope.launch {            //Функция которая через корутину удаляет заметку
         dao.deleteNote(id)
     }
-    fun deleteShopListName(id: Int) = viewModelScope.launch {            //Функция которая через корутину удаляет список с покупками
-        dao.deleteShopListName(id)
+    fun deleteShopList(id: Int, deleteList: Boolean) = viewModelScope.launch {            //Функция которая через корутину удаляет список с покупками
+        if(deleteList) dao.deleteShopListName(id)
+        dao.deleteShopItemsByListId(id)
     }
 
     class MainViewModelFactory(val database: MainDatabase): ViewModelProvider.Factory{      //Нужен для инициализации класса MainViewModel чтобы на прямую не пользоваться им.

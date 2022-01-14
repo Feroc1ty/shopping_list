@@ -45,7 +45,7 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
             val binding = ShopListItemBinding.bind(view)
             binding.apply {
                 tvName.text = shopListItem.name
-                if(shopListItem.itemInfo.isNullOrEmpty())
+                if(shopListItem.itemInfo.isEmpty())
                     tvInfo.isVisible = false
                 else
                     tvInfo.setText(shopListItem.itemInfo)
@@ -58,7 +58,10 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
                 checkBox.isChecked = shopListItem.itemChecked
                 setPaintFlagAndColor(binding)
                 checkBox.setOnClickListener {
-                    listener.onClickItem(shopListItem.copy(itemChecked = checkBox.isChecked))
+                    listener.onClickItem(shopListItem.copy(itemChecked = checkBox.isChecked), CHECK_BOX)
+                }
+                imEdit.setOnClickListener{
+                    listener.onClickItem(shopListItem, EDIT)
                 }
             }
         }
@@ -112,7 +115,11 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
     }
 
     interface Listener{
-        fun onClickItem(shopListNameItem: ShopListItem)
+        fun onClickItem(shopListNameItem: ShopListItem, state: Int)
+    }
+    companion object{
+        const val EDIT = 0
+        const val CHECK_BOX = 1
     }
 
 }

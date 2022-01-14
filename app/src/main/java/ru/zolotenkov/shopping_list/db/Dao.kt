@@ -28,6 +28,9 @@ interface Dao {                                            //Dao должен б
     @Query ("DELETE FROM shopping_list_names WHERE id IS :id")            //Удаляем из базы список
     suspend fun deleteShopListName(id: Int)
 
+    @Query ("DELETE FROM shop_list_item WHERE listId LIKE :listId")
+    suspend fun deleteShopItemsByListId(listId: Int)
+
     @Insert
     suspend fun insertNote(note: NoteItem)                //обязательно suspend потому что эти функции мы будем запускать внутри корутин. Внутри корутин потому что выполнение этих функций может занять некоторое время.
 
