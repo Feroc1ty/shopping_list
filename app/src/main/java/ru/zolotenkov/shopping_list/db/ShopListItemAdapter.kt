@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ListNameItemBinding
+import ru.zolotenkov.shopping_list.databinding.ShopLibraryListItemBinding
 import ru.zolotenkov.shopping_list.databinding.ShopListItemBinding
 import ru.zolotenkov.shopping_list.entities.ShopListNameItem
 import ru.zolotenkov.shopping_list.entities.ShopListItem
@@ -66,6 +67,22 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
             }
         }
         /*
+        Функция которая заполняет наш список с подсказками, для неё свой биндинг
+        */
+        fun setLibraryData(shopListItem: ShopListItem, listener: Listener){        //Функция которая заполняет наш шаблон c подсказками
+            val binding = ShopLibraryListItemBinding.bind(view)
+            binding.apply {
+                tvName.text = shopListItem.name
+
+                imEdit.setOnClickListener{
+                    listener.onClickItem(shopListItem, EDIT_LIBRARY_ITEM)
+                }
+                imDelete.setOnClickListener {
+                    listener.onClickItem(shopListItem, DELETE_LIBRARY_ITEM)
+                }
+            }
+        }
+        /*
         Проверяем на нажатие чекбокса, перечёркиваем текст, меняем цвет
          */
         private fun setPaintFlagAndColor(binding: ShopListItemBinding){
@@ -85,12 +102,7 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
 
             }
         }
-/*
-Функция которая заполняет наш список с подсказками, для неё свой биндинг
-*/
-        fun setLibraryData(shopListItem: ShopListItem, listener: Listener){        //Функция которая заполняет наш шаблон c подсказками
 
-        }
         companion object{
             fun createShopItem(parent: ViewGroup): ItemHolder {
                 return ItemHolder(
@@ -120,6 +132,8 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
     companion object{
         const val EDIT = 0
         const val CHECK_BOX = 1
+        const val EDIT_LIBRARY_ITEM = 2
+        const val DELETE_LIBRARY_ITEM = 3
     }
 
 }

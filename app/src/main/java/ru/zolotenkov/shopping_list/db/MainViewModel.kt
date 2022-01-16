@@ -10,7 +10,7 @@ import java.lang.IllegalArgumentException
 
 class MainViewModel(database: MainDatabase): ViewModel() {
     val dao = database.getDao()                                             //Инициализирует DAO
-
+    val libraryItems = MutableLiveData<List<LibraryItem>>()
 
     val allNotes: LiveData<List<NoteItem>> = dao.getAllNotes().asLiveData()     //Получаем как список типа NoteItem все наши заметки из базы
     val allShopListNamesItem: LiveData<List<ShopListNameItem>> = dao.getAllShopListNames().asLiveData()     //Получаем как список типа NoteItem все наши заметки из базы
@@ -18,10 +18,15 @@ class MainViewModel(database: MainDatabase): ViewModel() {
     fun getAllItemsFromList(listId: Int): LiveData<List<ShopListItem>>{
         return dao.getAllShopListItems(listId).asLiveData()
     }
+    fun getAllLibraryItems(name: String) = viewModelScope.launch {
+        libraryItems.postValue(dao.getAllLibraryItems(name))
+
+        }
 
     fun insertNote(note: NoteItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
         dao.insertNote(note)
     }
+
 
     fun insertShopListName(listNameItem: ShopListNameItem) = viewModelScope.launch {            //Функция которая через корутину записывает в базу новую заметку
         dao.insertShopListName(listNameItem)
@@ -40,11 +45,18 @@ class MainViewModel(database: MainDatabase): ViewModel() {
     fun updateNote(note: NoteItem) = viewModelScope.launch {            //Функция которая через корутину обновляет запись в бд
         dao.updateNote(note)
     }
+
+    fun updateLibraryItem(item: LibraryItem) = viewModelScope.launch {            //Функция которая через корутину обновляет запись в библиотеке сохранённых итемов
+        dao.updateLibraryItem(item)
+    }
     fun updateListName(shopListNameItem: ShopListNameItem) = viewModelScope.launch {            //Функция которая через корутину обновляет запись в бд
         dao.updateListName(shopListNameItem)
     }
     fun deleteNote(id: Int) = viewModelScope.launch {            //Функция которая через корутину удаляет заметку
         dao.deleteNote(id)
+    }
+    fun deleteLibraryItem(id: Int) = viewModelScope.launch {            //Функция которая через корутину удаляет подсказку из библиотеки
+        dao.deleteLibraryItem(id)
     }
     fun deleteShopList(id: Int, deleteList: Boolean) = viewModelScope.launch {            //Функция которая через корутину удаляет список с покупками
         if(deleteList) dao.deleteShopListName(id)

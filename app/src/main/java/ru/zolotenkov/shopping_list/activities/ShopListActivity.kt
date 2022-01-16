@@ -18,6 +18,7 @@ import ru.zolotenkov.shopping_list.databinding.ActivityShopListBinding
 import ru.zolotenkov.shopping_list.db.MainViewModel
 import ru.zolotenkov.shopping_list.db.ShopListItemAdapter
 import ru.zolotenkov.shopping_list.dialogs.EditListItemDialog
+import ru.zolotenkov.shopping_list.entities.LibraryItem
 import ru.zolotenkov.shopping_list.entities.ShopListItem
 import ru.zolotenkov.shopping_list.entities.ShopListNameItem
 import ru.zolotenkov.shopping_list.utils.ShareHelper
@@ -66,6 +67,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("MyLog", "$s")
+                mainViewModel.getAllLibraryItems("%$s%")
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -128,6 +130,29 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
                     View.GONE
         })
     }
+
+    private fun libraryItemObserver(){
+        mainViewModel.libraryItems.observe(this, {
+            val tempShopList = ArrayList<ShopListItem>()
+            it.forEach{item ->
+                val shopItem = ShopListItem(
+                    item.id,
+                    item.name,
+                    "",
+                    false,
+                    0,
+                    1
+                )
+                tempShopList.add(shopItem)
+            }
+            adapter?.submitList(tempShopList)
+            binding.tvEmpty.visibility =
+                if(it.isEmpty())
+                    View.VISIBLE
+                else
+                    View.GONE
+        })
+    }
     /*
     Инициализация Recycler View
      */
@@ -145,14 +170,20 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         return object : MenuItem.OnActionExpandListener{
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
                 saveItem.isVisible = true
-                edItem?.addTextChangedListener(textWatcher())
+                edItem?.addTextChangedListener(textWatcher)
+                libraryItemObserver()
+                mainViewModel.getAllItemsFromList(shopListNameItem?.id!!).removeObservers(this@ShopListActivity)
+                mainViewModel.getAllLibraryItems("%%")
                 return true
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
                 saveItem.isVisible = false
-                edItem?.removeTextChangedListener(textWatcher())
+                edItem?.removeTextChangedListener(textWatcher)
                 invalidateOptionsMenu()
+                mainViewModel.libraryItems.removeObservers(this@ShopListActivity)
+                edItem?.setText("")
+                listItemObserver()
                 return true
             }
 
@@ -171,6 +202,11 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         when(state){
             ShopListItemAdapter.CHECK_BOX -> mainViewModel.updateListItem(shopListItem)
             ShopListItemAdapter.EDIT -> editListItem(shopListItem)
+            ShopListItemAdapter.EDIT_LIBRARY_ITEM -> editLibraryItem(shopListItem)
+            ShopListItemAdapter.DELETE_LIBRARY_ITEM -> {
+                mainViewModel.deleteLibraryItem(shopListItem.id!!)
+                mainViewModel.getAllLibraryItems("%%${edItem?.text.toString()}")
+            }
         }
 
     }
@@ -179,6 +215,16 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         EditListItemDialog.showDialog(this, item, object : EditListItemDialog.Listener{
             override fun onClick(item: ShopListItem) {
                 mainViewModel.updateListItem(item)
+            }
+
+        })
+    }
+
+    private fun editLibraryItem(item: ShopListItem){
+        EditListItemDialog.showDialog(this, item, object : EditListItemDialog.Listener{
+            override fun onClick(item: ShopListItem) {
+                mainViewModel.updateLibraryItem(LibraryItem(item.id, item.name))
+                mainViewModel.getAllLibraryItems("%%${edItem?.text.toString()}")
             }
 
         })
