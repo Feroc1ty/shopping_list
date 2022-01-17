@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shopping_list">
         <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ShopListActivity"
             android:exported="false" />
         <activity

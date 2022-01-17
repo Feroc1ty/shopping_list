@@ -1,5 +1,6 @@
 package ru.zolotenkov.shopping_list.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import ru.zolotenkov.shopping_list.entities.ShopListItem
 import ru.zolotenkov.shopping_list.fragments.FragmentManager
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
 import ru.zolotenkov.shopping_list.fragments.ShopListNamesFragment
+import ru.zolotenkov.shopping_list.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding               //Все элементы гл. экрана activity_main
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
         binding.bNav.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.settings ->{
-                    Toast.makeText(this, "Pressed Settings", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, SettingsActivity::class.java))
                 }
                 R.id.notes -> {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
