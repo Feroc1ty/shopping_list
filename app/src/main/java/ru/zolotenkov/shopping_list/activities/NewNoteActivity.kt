@@ -32,8 +32,11 @@ class NewNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewNoteBinding
     private var note: NoteItem? = null
     private var pref: SharedPreferences? = null
+    private lateinit var defPref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        defPref = PreferenceManager.getDefaultSharedPreferences(this)
+        setTheme(getSelectedTheme())
         binding = ActivityNewNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         actionBarSettings()
@@ -269,5 +272,15 @@ class NewNoteActivity : AppCompatActivity() {
      */
     private fun EditText.setTextSize(size: String?){
         if(size != null) this.textSize = size.toFloat()
+    }
+
+    /*
+    Функция которая возвращает тему которая указана в настройках
+     */
+    private fun getSelectedTheme(): Int{
+        return if(defPref.getString("theme_key", "blue") == "blue"){
+            R.style.Theme_NewNoteBlue
+        }
+        else R.style.Theme_NewNoteRed
     }
 }
