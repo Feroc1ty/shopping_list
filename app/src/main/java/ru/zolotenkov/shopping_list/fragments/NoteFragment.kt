@@ -11,7 +11,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ru.zolotenkov.shopping_list.activities.MainApp
 import ru.zolotenkov.shopping_list.activities.NewNoteActivity
 import ru.zolotenkov.shopping_list.databinding.FragmentNoteBinding
@@ -60,10 +63,21 @@ class NoteFragment : BaseFragment(), NoteAdapter.Listner {
     Функция для инициализации Recycler View
      */
     private fun initRcView() = with(binding) {
-        rcViewNote.layoutManager = LinearLayoutManager(activity)
         defPref = PreferenceManager.getDefaultSharedPreferences(activity)
+        rcViewNote.layoutManager = getLayoutManager()
         adapter = NoteAdapter(this@NoteFragment, defPref)
         rcViewNote.adapter = adapter
+    }
+    /*
+    Функция которая проверяет настройки отображения и в зависимости от настроек выдает либ оlinear либо grid отображение в rcView
+     */
+    private fun getLayoutManager(): RecyclerView.LayoutManager{
+        return  if(defPref.getString("note_style_key", "Linear") == "Linear"){
+            LinearLayoutManager(activity)
+        }
+        else {
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        }
     }
     /*
     Функция которая следит за изменениями в базе данных и будет выдавать обновлённый список
