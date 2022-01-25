@@ -1,6 +1,7 @@
 package ru.zolotenkov.shopping_list.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.w3c.dom.Text
 import ru.zolotenkov.shopping_list.R
@@ -30,6 +32,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
     private var edItem: EditText? = null
     private var adapter: ShopListItemAdapter? = null
     private lateinit var textWatcher: TextWatcher
+    private lateinit var defPref: SharedPreferences
 
     private val mainViewModel: MainViewModel by viewModels{
         MainViewModel.MainViewModelFactory((applicationContext as MainApp).database)
@@ -37,11 +40,14 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        defPref = PreferenceManager.getDefaultSharedPreferences(this)
+        setTheme(getSelectedTheme())
         binding = ActivityShopListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
         initRcView()
         listItemObserver()
+        actionBarSettings()
     }
     /*
     Подключаем созданное меню к этому активити
@@ -87,6 +93,9 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
                 }
                 R.id.delete_list -> {
                     mainViewModel.deleteShopList(shopListNameItem?.id!!, true)
+                    finish()
+                }
+                android.R.id.home -> {
                     finish()
                 }
                 R.id.clear_list -> {
@@ -243,8 +252,27 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         mainViewModel.updateListName(tempShopListNameItem!!)
     }
 
+    /*
+    Подключаем отображение кнопки назад в экшн баре в этом активити
+     */
+    private fun actionBarSettings(){
+        val ab = supportActionBar
+        ab?.setDisplayHomeAsUpEnabled(true)
+    }
+
     override fun onBackPressed() {
         saveItemCount()
         super.onBackPressed()
+    }
+
+
+    /*
+    Функция которая возвращает тему которая указана в настройках
+     */
+    private fun getSelectedTheme(): Int{
+        return if(defPref.getString("theme_key", "blue") == "blue"){
+            R.style.Theme_NewNoteBlue
+        }
+        else R.style.Theme_NewNoteRed
     }
 }

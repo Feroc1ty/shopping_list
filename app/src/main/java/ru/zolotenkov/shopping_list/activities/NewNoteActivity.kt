@@ -112,6 +112,7 @@ class NewNoteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     /*
     Функция которая смотрит какой текст выделен, делает проверку есть ли там стиль, если да то убирает, если нет то создает
      */
