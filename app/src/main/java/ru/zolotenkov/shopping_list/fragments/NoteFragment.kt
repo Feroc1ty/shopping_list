@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.activities.MainApp
 import ru.zolotenkov.shopping_list.activities.NewNoteActivity
 import ru.zolotenkov.shopping_list.databinding.FragmentNoteBinding
@@ -28,6 +29,7 @@ class NoteFragment : BaseFragment(), NoteAdapter.Listner {
     private lateinit var editLauncher: ActivityResultLauncher<Intent>
     private lateinit var adapter: NoteAdapter
     private lateinit var defPref: SharedPreferences
+
 
     private val mainViewModel: MainViewModel by activityViewModels{
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)

@@ -121,7 +121,6 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                             startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
                         }
                     })
-
                 }
                 R.id.notes -> {
                     showInterAd(object : AdListener{

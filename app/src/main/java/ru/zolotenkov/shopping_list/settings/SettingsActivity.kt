@@ -13,6 +13,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         defPref = PreferenceManager.getDefaultSharedPreferences(this)
         setTheme(getSelectedTheme())
+        setTitle(getString(R.string.settings_activity_title))
         setContentView(R.layout.activity_settings)
         /*
         Если savedInstanceState не пустой, то заменяем наш плейсхолдер в нашем активити с настройками, на фрагмент с настройками созданный в xml

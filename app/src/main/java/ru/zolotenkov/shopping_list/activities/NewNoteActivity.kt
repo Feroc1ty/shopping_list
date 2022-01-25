@@ -75,7 +75,13 @@ class NewNoteActivity : AppCompatActivity() {
         if(sNote != null) {
             note = sNote as NoteItem
             fillNote()
+            /*
+            Проверка и выставление заголовка при создании или редактировании заметки
+             */
+            setTitle(getString(R.string.edit_note_activity_title))
         }
+        else
+            setTitle(getString(R.string.new_note_activity_title))
 
     }
     /*

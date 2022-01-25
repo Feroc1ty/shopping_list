@@ -48,6 +48,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         initRcView()
         listItemObserver()
         actionBarSettings()
+        setTitle(shopListNameItem?.name)
     }
     /*
     Подключаем созданное меню к этому активити
