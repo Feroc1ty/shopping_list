@@ -47,7 +47,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:284982355058:android:0b8b24ec6f9984cd3a0eeb",
         "android_client_info": {
-          "package_name": "ru.zolotenkov.shopping_list"
+          "package_name": "ru.rykunov.shopping_list"
         }
       },
       "oauth_client": [
@@ -55,7 +55,7 @@
           "client_id": "284982355058-2rrpfrv7h9nk144fqtubgum15dd2g66n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ru.zolotenkov.shopping_list",
+            "package_name": "ru.rykunov.shopping_list",
             "certificate_hash": "152f0267ba7c03d68ec39c4bc7b8956e4005fd78"
           }
         },

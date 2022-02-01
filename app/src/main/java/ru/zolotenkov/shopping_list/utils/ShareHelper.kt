@@ -1,11 +1,11 @@
 package ru.zolotenkov.shopping_list.utils
 
 import android.content.Intent
+import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.entities.ShopListItem
 import java.lang.StringBuilder
 
 object ShareHelper {
-
     /*
     Формирует через интент передачу данных через кнопку поделиться и закидывает текст из функции makeShareText в виде string
      */
@@ -24,10 +24,10 @@ object ShareHelper {
     private fun makeShareText(shopList: List<ShopListItem>, listName: String): String {
         val sBuilder = StringBuilder()
         var counter = 0
-        sBuilder.append("<<$listName>>")
+        sBuilder.append("List: '$listName'")
         sBuilder.append("\n")
         shopList.forEach{
-            sBuilder.append("${++counter} - ${it.name} (${it.itemInfo})")
+            sBuilder.append("${++counter} - ${it.name} ${it.itemInfo}")
             sBuilder.append("\n")
         }
         return sBuilder.toString()

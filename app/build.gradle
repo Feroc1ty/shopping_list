@@ -12,7 +12,7 @@ android {
         viewBinding true
     }
     defaultConfig {
-        applicationId "ru.zolotenkov.shopping_list"
+        applicationId "ru.rykunov.shopping_list"
         minSdk 19
         targetSdk 31
         versionCode 1

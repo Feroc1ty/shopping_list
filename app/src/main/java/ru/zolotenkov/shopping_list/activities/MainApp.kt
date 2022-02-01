@@ -6,7 +6,7 @@ import ru.zolotenkov.shopping_list.db.MainDatabase
 /*
  * Наследуемся от Application чтобы быть на уровне всего приложения.
  */
-class MainApp : Application() {
+class MainApp : Application(){
     /*
      * by lazy запускается если у нас в database пусто, база ещё не создана.
      * Он запускает код и запихивает нашу базу в переменную и больше не запускается при следующих обращениях,

@@ -11,6 +11,7 @@
             android:key="note_style_key"
             android:title="@string/choose_note_style"
             app:useSimpleSummaryProvider="true"
+            app:isPreferenceVisible="false"
             android:icon="@drawable/ic_style"/>
         <ListPreference
             android:defaultValue="hh:mm:ss - dd/MM/yyyy"
@@ -37,7 +38,8 @@
             app:useSimpleSummaryProvider="true"
             android:icon="@drawable/ic_theme_style"/>
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/note_text_settings">
+    <PreferenceCategory android:title="@string/note_text_settings"
+        app:isPreferenceVisible="false">
 
         <ListPreference
             android:defaultValue="16"

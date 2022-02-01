@@ -4,9 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.EditListItemDialogBinding
-import ru.zolotenkov.shopping_list.databinding.NewListDialogBinding
 import ru.zolotenkov.shopping_list.entities.ShopListItem
 
 

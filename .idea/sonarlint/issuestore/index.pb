@@ -1,33 +1,3 @@
 
-u
-Eapp/src/main/java/ru/zolotenkov/shopping_list/dialogs/DeleteDialog.kt,d\7\d7f562dc9ee2344d4e033090407dbd1da48379a8
-w
-Gapp/src/main/java/ru/zolotenkov/shopping_list/fragments/BaseFragment.kt,4\c\4c8f5f5fd8d4f4a2c97a493c1c9ff12572ad307b
-u
-Eapp/src/main/java/ru/zolotenkov/shopping_list/entities/LibraryItem.kt,1\1\1116debd3393dff65882f78e1c1cd58dc7ae1922
-v
-Fapp/src/main/java/ru/zolotenkov/shopping_list/entities/ShopListItem.kt,2\c\2cbde004458e397b4d06b37193de9d0326ed5c67
-s
-Capp/src/main/java/ru/zolotenkov/shopping_list/activities/MainApp.kt,4\e\4e6d3bf6b1d1db230bcd83cdcaa057e51e608e46
-q
-Aapp/src/main/java/ru/zolotenkov/shopping_list/db/MainViewModel.kt,8\4\84704f3fa05bb132aedb141f6c59dd4d6f14d1a9
-{
-Kapp/src/main/java/ru/zolotenkov/shopping_list/dialogs/EditListItemDialog.kt,3\5\353ee266cad29ecb8a12862e4b8cb7ce55519993
-u
-Eapp/src/main/java/ru/zolotenkov/shopping_list/utils/MyTouchListner.kt,2\1\21e921da721da283dd7d9468a3c0a90608fbf264
-r
-Bapp/src/main/java/ru/zolotenkov/shopping_list/utils/ShareHelper.kt,6\2\62dff75fc877e0c0268cce26921063dfadc383fa
-r
-Bapp/src/main/java/ru/zolotenkov/shopping_list/utils/HtmlManager.kt,4\a\4a2228b2f59526cf134bb8ecc108eeaa714787ac
-g
-7app/src/main/java/ru/zolotenkov/shopping_list/db/Dao.kt,0\1\01550b9605bf0df89edf408ce8bfc03205c7b302
-r
-Bapp/src/main/java/ru/zolotenkov/shopping_list/entities/NoteItem.kt,2\e\2eb66163f3c9c850163ea5337589dee633535f5f
-p
-@app/src/main/java/ru/zolotenkov/shopping_list/db/MainDatabase.kt,7\c\7c0f47ae18f3eca9c5cafb83d2cfa899ad1e8265
-r
-Bapp/src/main/java/ru/zolotenkov/shopping_list/utils/TimeManager.kt,2\6\26d069e0f8813d4d220ce76a10393ae77771865a
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233

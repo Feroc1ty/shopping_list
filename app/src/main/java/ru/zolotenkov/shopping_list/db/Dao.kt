@@ -47,6 +47,7 @@ interface Dao {                                            //Dao должен б
     @Insert
     suspend fun insertLibraryItem(libraryItem: LibraryItem)
 
+
     @Insert
     suspend fun insertShopListName(nameItem: ShopListNameItem)                //обязательно suspend потому что эти функции мы будем запускать внутри корутин. Внутри корутин потому что выполнение этих функций может занять некоторое время.
 

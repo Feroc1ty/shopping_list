@@ -11,11 +11,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.activities.MainApp
 import ru.zolotenkov.shopping_list.activities.NewNoteActivity
 import ru.zolotenkov.shopping_list.databinding.FragmentNoteBinding

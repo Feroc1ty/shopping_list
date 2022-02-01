@@ -9,6 +9,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/notes"
+        android:visible="false"
         android:icon="@drawable/ic_note"
         android:title="@string/notes"
         app:showAsAction="ifRoom" />

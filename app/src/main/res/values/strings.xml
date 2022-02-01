@@ -23,18 +23,18 @@
     <string name="choose_note_style">Choose Note Style</string>
     <string name="choose_time_format">Choose Time Format</string>
     <string name="remove_ads">Remove ADS</string>
-    <string name="remove_ads_summary">Remove all adds from this app</string>
+    <string name="remove_ads_summary">Remove all ads from this app</string>
     <string name="theme_settings">Theme settings</string>
     <string name="choose_theme">Choose Theme</string>
     <string name="note_text_settings">Note text settings</string>
     <string name="text_size">Choose text size</string>
     <string name="title_text_size">Title text size</string>
     <string name="content_text_size">Content text size</string>
+    <string name="empty">Empty</string>
 
     <string name="settings_activity_title">Settings</string>
     <string name="new_note_activity_title">Create new note</string>
     <string name="edit_note_activity_title">Edit note</string>
     <string name="shopping_list_activity_title">Shopping List</string>
-
 
 </resources>

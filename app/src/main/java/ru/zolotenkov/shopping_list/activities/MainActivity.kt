@@ -7,29 +7,29 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.preference.PreferenceManager
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityMainBinding
 import ru.zolotenkov.shopping_list.dialogs.NewListDialog
-import ru.zolotenkov.shopping_list.entities.ShopListItem
 import ru.zolotenkov.shopping_list.fragments.FragmentManager
 import ru.zolotenkov.shopping_list.fragments.NoteFragment
 import ru.zolotenkov.shopping_list.fragments.ShopListNamesFragment
 import ru.zolotenkov.shopping_list.settings.SettingsActivity
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding               //Все элементы гл. экрана activity_main
     private var currentMenuItemId = R.id.shop_list
     private lateinit var defPref: SharedPreferences
     private var currentTheme = ""
+    lateinit var mAdView : AdView
+    /*
     private var iAd: InterstitialAd? = null
     private var adShowCounter = 0
     private var adShowCounterMax = 4
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         defPref = PreferenceManager.getDefaultSharedPreferences(this)
@@ -44,12 +44,21 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
              */
         FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
         setBottomNavListner()                                           //Кидаем её в цикл активити, слушаем нажатия.
-        loadInterAd()
+        loadBannerAd()
+        Log.d("MyLog", "${Locale.getDefault().getDisplayLanguage()}")
     }
     /*
     Функция которая загружает рекламу
     нужно передать контекст, айди рекламы, колбек функции когда загружается реклама
      */
+
+    private fun loadBannerAd(){
+        MobileAds.initialize(this) {}
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+    }
+/*
     private fun loadInterAd(){
         val request = AdRequest.Builder().build()
         InterstitialAd.load(this, getString(R.string.inter_ad_id), request,
@@ -65,9 +74,11 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                 }
         })
     }
+
+ */
     /*
     Функция для показа рекламы
-     */
+
     private fun showInterAd(adListener: AdListener){
         if(iAd != null && adShowCounter > adShowCounterMax){
             iAd?.fullScreenContentCallback = object : FullScreenContentCallback(){
@@ -107,6 +118,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
             adListener.onFinish()
         }
     }
+    */
 
     private fun setBottomNavListner(){                                  //Функция слушатель нажатий в bottomMenu
         binding.bNav.setOnItemSelectedListener {
@@ -116,19 +128,11 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                 Запускается реклама при переходе в настройки и открывается активити только при выполнении условий для запуска функции onFinish
                  */
                 R.id.settings ->{
-                    showInterAd(object : AdListener{
-                        override fun onFinish() {
-                            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
-                        }
-                    })
+                    startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
                 }
                 R.id.notes -> {
-                    showInterAd(object : AdListener{
-                        override fun onFinish() {
-                            currentMenuItemId = R.id.notes
-                            FragmentManager.setFragment(NoteFragment.newInstance(), this@MainActivity)
-                        }
-                    })
+                    currentMenuItemId = R.id.notes
+                    FragmentManager.setFragment(NoteFragment.newInstance(), this@MainActivity)
                 }
                 R.id.shop_list -> {
                     currentMenuItemId = R.id.shop_list
@@ -162,11 +166,12 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     override fun onClick(name: String) {
         Toast.makeText(this, "Its OK", Toast.LENGTH_SHORT).show()
     }
+/*
+interface AdListener{
+   fun onFinish(){
 
-    interface AdListener{
-        fun onFinish(){
-
-        }
-    }
+   }
+}
+ */
 
 }

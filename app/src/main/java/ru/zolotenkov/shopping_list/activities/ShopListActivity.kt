@@ -14,7 +14,10 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.w3c.dom.Text
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ActivityShopListBinding
 import ru.zolotenkov.shopping_list.db.MainViewModel
@@ -33,6 +36,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
     private var adapter: ShopListItemAdapter? = null
     private lateinit var textWatcher: TextWatcher
     private lateinit var defPref: SharedPreferences
+    lateinit var mAdView : AdView
 
     private val mainViewModel: MainViewModel by viewModels{
         MainViewModel.MainViewModelFactory((applicationContext as MainApp).database)
@@ -48,8 +52,18 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         initRcView()
         listItemObserver()
         actionBarSettings()
+        loadBannerAd()
         setTitle(shopListNameItem?.name)
     }
+
+    private fun loadBannerAd(){
+        MobileAds.initialize(this) {}
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+    }
+
     /*
     Подключаем созданное меню к этому активити
     Находим кнопку save, записываем её в переменную и скрываем для отображения
@@ -97,6 +111,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
                     finish()
                 }
                 android.R.id.home -> {
+                    saveItemCount()
                     finish()
                 }
                 R.id.clear_list -> {

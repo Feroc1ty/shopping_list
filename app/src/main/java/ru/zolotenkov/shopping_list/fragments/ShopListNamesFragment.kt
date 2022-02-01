@@ -1,12 +1,14 @@
 package ru.zolotenkov.shopping_list.fragments
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.zolotenkov.shopping_list.activities.MainApp
 import ru.zolotenkov.shopping_list.activities.ShopListActivity
@@ -22,6 +24,7 @@ import ru.zolotenkov.shopping_list.utils.TimeManager
 class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
     private lateinit var binding: FragmentShopListNamesBinding
     private lateinit var adapter: ShopListNameAdapter
+    private lateinit var defPref: SharedPreferences
 
     private val mainViewModel: MainViewModel by activityViewModels{
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
@@ -67,8 +70,9 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
     Функция для инициализации Recycler View
      */
     private fun initRcView() = with(binding) {
+        defPref = PreferenceManager.getDefaultSharedPreferences(activity)
         rvView.layoutManager = LinearLayoutManager(activity)
-        adapter = ShopListNameAdapter(this@ShopListNamesFragment)
+        adapter = ShopListNameAdapter(this@ShopListNamesFragment, defPref)
         rvView.adapter = adapter
 
     }
@@ -77,10 +81,14 @@ class ShopListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
      */
     private fun observer(){
         mainViewModel.allShopListNamesItem.observe(viewLifecycleOwner, {
+            binding.tvEmpty.visibility =
+                if(it.isEmpty())
+                    View.VISIBLE
+                else
+                    View.GONE
             adapter.submitList(it)
         })
     }
-
 
 
     companion object {

@@ -1,6 +1,7 @@
 package ru.zolotenkov.shopping_list.db
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.os.Build
 import android.view.LayoutInflater
@@ -14,15 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.zolotenkov.shopping_list.R
 import ru.zolotenkov.shopping_list.databinding.ListNameItemBinding
 import ru.zolotenkov.shopping_list.entities.ShopListNameItem
+import ru.zolotenkov.shopping_list.utils.TimeManager
 
-class ShopListNameAdapter(private val listener: Listener): ListAdapter<ShopListNameItem, ShopListNameAdapter.ItemHolder>(ItemComparator()) {
+class ShopListNameAdapter(private val listener: Listener, private val defPref: SharedPreferences): ListAdapter<ShopListNameItem, ShopListNameAdapter.ItemHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.setData(getItem(position), listener)
+        holder.setData(getItem(position), listener, defPref)
     }
 
 
@@ -30,10 +32,11 @@ class ShopListNameAdapter(private val listener: Listener): ListAdapter<ShopListN
         private val binding = ListNameItemBinding.bind(view)
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        fun setData(shopListNameItem: ShopListNameItem, listener: Listener) = with(binding){        //Функция которая заполняет наш шаблон данными из таблицы NoteItem
+        fun setData(shopListNameItem: ShopListNameItem, listener: Listener, defPref: SharedPreferences) = with(binding){        //Функция которая заполняет наш шаблон данными из таблицы NoteItem
 
             tvListName.text = shopListNameItem.name
             tvTime.text = shopListNameItem.time
+            tvTime.text = TimeManager.getTimeFormat(shopListNameItem.time, defPref)
             pBar.max = shopListNameItem.allItemCounter
             pBar.progress = shopListNameItem.checkedItemsCounter
             /*

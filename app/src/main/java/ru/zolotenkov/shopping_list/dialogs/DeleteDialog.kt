@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import ru.zolotenkov.shopping_list.databinding.DeleteDialogBinding
-import ru.zolotenkov.shopping_list.databinding.NewListDialogBinding
 
 /*
 Создаём AlertDialog из шаблона new_list_dialog

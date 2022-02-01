@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.zolotenkov.shopping_list.R
-import ru.zolotenkov.shopping_list.databinding.ListNameItemBinding
 import ru.zolotenkov.shopping_list.databinding.ShopLibraryListItemBinding
 import ru.zolotenkov.shopping_list.databinding.ShopListItemBinding
-import ru.zolotenkov.shopping_list.entities.ShopListNameItem
 import ru.zolotenkov.shopping_list.entities.ShopListItem
 
 class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListItem, ShopListItemAdapter.ItemHolder>(ItemComparator()) {
@@ -36,6 +34,7 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
     override fun getItemViewType(position: Int): Int {
         return getItem(position).itemType
     }
+
 
     class ItemHolder(val view: View) : RecyclerView.ViewHolder(view){
 
@@ -95,6 +94,8 @@ class ShopListItemAdapter(private val listener: Listener): ListAdapter<ShopListI
                     tvInfo.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                     tvName.setTextColor(ContextCompat.getColor(binding.root.context, R.color.gray))
                     tvInfo.setTextColor(ContextCompat.getColor(binding.root.context, R.color.gray))
+
+
                 }
                 else{
                     tvName.paintFlags = Paint.ANTI_ALIAS_FLAG
