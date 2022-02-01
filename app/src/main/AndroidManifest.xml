@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.zolotenkov.shopping_list">
+    package="ru.rykunov.shopping_list">
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="ru.zolotenkov.shopping_list.activities.MainApp"
+        android:name="ru.rykunov.shopping_list.activities.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,18 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingListBlue">
         <activity
-            android:name="ru.zolotenkov.shopping_list.settings.SettingsActivity"
+            android:name="ru.rykunov.shopping_list.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name="ru.zolotenkov.shopping_list.activities.ShopListActivity"
+            android:name="ru.rykunov.shopping_list.activities.ShopListActivity"
             android:exported="false" />
         <activity
-            android:name="ru.zolotenkov.shopping_list.activities.NewNoteActivity"
+            android:name="ru.rykunov.shopping_list.activities.NewNoteActivity"
             android:exported="false"
             android:theme="@style/Theme.NewNoteBlue"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="ru.zolotenkov.shopping_list.activities.MainActivity"
+            android:name="ru.rykunov.shopping_list.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
