@@ -42,8 +42,9 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
              */
         FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
         setBottomNavListner()                                           //Кидаем её в цикл активити, слушаем нажатия.
+        /*
         loadBannerAd()
-        Log.d("MyLog", "${Locale.getDefault().getDisplayLanguage()}")
+         */
     }
     /*
     Функция которая загружает рекламу

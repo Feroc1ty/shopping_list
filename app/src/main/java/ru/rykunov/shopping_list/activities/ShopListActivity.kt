@@ -86,7 +86,6 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.d("MyLog", "$s")
                 mainViewModel.getAllLibraryItems("%$s%")
             }
 
