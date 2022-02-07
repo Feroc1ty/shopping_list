@@ -66,7 +66,7 @@ abstract class MainDatabase : RoomDatabase() {
                 }                                                 //В первый раз INSTANCE будет null по этому запустится весь этот код. Во второй раз когда вызовется INSTANCE эта переменная уже будет заполнена по этому вернет нормально INSTANCE.
         }
         private fun getLocaleForLibraryDb(): String{
-            return if (Locale.getDefault().toString() == "ru" || Locale.getDefault().toString() == "ru-BY" || Locale.getDefault().toString() == "ru-UA" || Locale.getDefault().toString() == "ru-MD"){
+            return if (Locale.getDefault().getDisplayLanguage().equals("русский") || Locale.getDefault().getDisplayLanguage().equals("українська")){
                 "database/library_ru.db"
             }
             else "database/library.db"

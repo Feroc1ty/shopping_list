@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.google.android.gms.ads.*
 import ru.rykunov.shopping_list.R
+import ru.rykunov.shopping_list.billing.BillingManager
 import ru.rykunov.shopping_list.databinding.ActivityMainBinding
 import ru.rykunov.shopping_list.dialogs.NewListDialog
 import ru.rykunov.shopping_list.fragments.FragmentManager
@@ -42,22 +43,21 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
              */
         FragmentManager.setFragment(ShopListNamesFragment.newInstance(), this)
         setBottomNavListner()                                           //Кидаем её в цикл активити, слушаем нажатия.
-        /*
-        loadBannerAd()
-         */
+
+        Log.d("MyLog", "${Locale.getDefault().getDisplayLanguage().toString()} - current language")
     }
     /*
     Функция которая загружает рекламу
     нужно передать контекст, айди рекламы, колбек функции когда загружается реклама
-     */
+
 
     private fun loadBannerAd(){
-        MobileAds.initialize(this) {}
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+            MobileAds.initialize(this) {}
+            mAdView = findViewById(R.id.adView)
+            val adRequest = AdRequest.Builder().build()
+            mAdView.loadAd(adRequest)
     }
-/*
+
     private fun loadInterAd(){
         val request = AdRequest.Builder().build()
         InterstitialAd.load(this, getString(R.string.inter_ad_id), request,

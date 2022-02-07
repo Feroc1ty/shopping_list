@@ -18,6 +18,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import ru.rykunov.shopping_list.R
+import ru.rykunov.shopping_list.billing.BillingManager
 import ru.rykunov.shopping_list.databinding.ActivityShopListBinding
 import ru.rykunov.shopping_list.db.MainViewModel
 import ru.rykunov.shopping_list.db.ShopListItemAdapter
@@ -36,6 +37,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
     private lateinit var textWatcher: TextWatcher
     private lateinit var defPref: SharedPreferences
     lateinit var mAdView : AdView
+    private lateinit var pref: SharedPreferences
 
     private val mainViewModel: MainViewModel by viewModels{
         MainViewModel.MainViewModelFactory((applicationContext as MainApp).database)
@@ -43,6 +45,7 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pref = getSharedPreferences(BillingManager.MAIN_PREF, MODE_PRIVATE)
         defPref = PreferenceManager.getDefaultSharedPreferences(this)
         setTheme(getSelectedTheme())
         binding = ActivityShopListBinding.inflate(layoutInflater)
@@ -51,15 +54,22 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         initRcView()
         listItemObserver()
         actionBarSettings()
-        loadBannerAd()
         setTitle(shopListNameItem?.name)
+        if (!pref.getBoolean(BillingManager.REMOVE_ADS_KEY, false)){
+            binding.adFrame.visibility = View.VISIBLE
+            loadBannerAd()
+        }
+        else binding.adFrame.visibility = View.GONE
     }
 
     private fun loadBannerAd(){
-        MobileAds.initialize(this) {}
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        if(!pref.getBoolean(BillingManager.REMOVE_ADS_KEY, false)) {
+            MobileAds.initialize(this) {}
+            mAdView = findViewById(R.id.adView)
+            val adRequest = AdRequest.Builder().build()
+            mAdView.loadAd(adRequest)
+            binding.adFrame.visibility = View.VISIBLE
+        }
 
     }
 
